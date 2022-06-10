@@ -17,6 +17,7 @@ Trello.prototype.createQuery = function () {
 
 function makeRequest(fn, uri, options, callback) {
     if (callback) {
+      console.log("Tiene callback");
       var completeCallback = function (result, response) {
         // in case we hit HTTP 429, delay requests by random timeout in between minRequestDelay and maxRequestDelay
         // http://help.trello.com/article/838-api-rate-limits
@@ -27,6 +28,7 @@ function makeRequest(fn, uri, options, callback) {
         }
         else if (result instanceof Error) {
             callback(result, null);
+            console.log(result);
         } else if (response != null && response.statusCode >= 400) {
             const rv = new Error(result)
             rv.response = response
@@ -35,7 +37,8 @@ function makeRequest(fn, uri, options, callback) {
             callback(null, result);
         }
       }
-
+      console.log(options);
+      console.log(uri);
       fn(uri, options).once('complete', completeCallback);
 
     } else {
@@ -137,6 +140,8 @@ Trello.prototype.addCard = function (name, description, listId, callback) {
 
     if (description !== null)
         query.desc = description;
+
+    console.log("Card with description "+description);
 
     return makeRequest(rest.post, this.uri + '/1/cards', {query: query}, callback);
 };

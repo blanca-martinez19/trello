@@ -50,9 +50,10 @@
     "trello"
   ],
   "dependencies": {
+    "dotenv": "^16.0.1",
     "es6-promise": "^4.2.8",
-    "object-assign": "~4.1.0",
-    "needle": "3.0.0"
+    "needle": "3.0.0",
+    "object-assign": "~4.1.0"
   },
   "devDependencies": {
     "mocha": "^9.1.3",
